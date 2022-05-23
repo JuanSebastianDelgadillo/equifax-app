@@ -9,18 +9,32 @@ import { Login } from "../models/login.model";
 })
 export class UsuariosService {
 
-  constructor(private http: HttpClient){}
-
+  token = null;
   path = "localhost:90/api/v1"
-  headers: {
-    'Content-Type': 'application/json',
-    'x-api-token': `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`
+
+  constructor(private http: HttpClient){
+    this.token = localStorage['usuarios.token'] 
   }
+  headers: {'Content-Type': 'application/json'}
 
   buscarLogin(login: Login){
     return this.http.post(this.path+"/getLogin", login,{ 'headers': this.headers })
     .pipe(map((response: any) => response));
   }
+
+  buscarUsuario(idUser:any){
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.token);
+    return this.http.post(this.path+"/getUsuario/"+idUser, { 'headers': headers })
+    .pipe(map((response: any) => response));
+  }
+
+
+  validaToken(token:string){
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.token);
+    return this.http.post(this.path+"/validaToken/", token,{ 'headers': headers })
+    .pipe(map((response: any) => response.payload));
+  }
+
 
 
 }

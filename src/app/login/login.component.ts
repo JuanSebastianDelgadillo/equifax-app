@@ -23,9 +23,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-
-    console.log("entre")
-
     if(this.nombreLogin == "" || this.passLogin == "") { 
       this.validaLogin = false
       return
@@ -42,6 +39,7 @@ export class LoginComponent implements OnInit {
         console.log(response)
         if(response.internalCode == 200){
           if(response.client){
+            localStorage.setItem('usuario', response.payload);
             this.router.navigate(['tickets'])
           }
         }else{

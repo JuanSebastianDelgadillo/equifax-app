@@ -8,12 +8,14 @@ import { LoginComponent } from './login/login.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { UsuariosService } from './services/usuarios.service';
 import { TicketsService } from './services/tickets.service';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TicketsComponent,
-    LoginComponent
+    LoginComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

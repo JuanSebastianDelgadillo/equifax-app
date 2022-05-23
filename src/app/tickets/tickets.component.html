@@ -1,1 +1,25 @@
-
+<div class="row">
+    <div class="col-md-12">
+        <table *ngIf="!alertData" class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Título</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Usuario</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ticket in tickets">
+                <th scope="row">{{ticket.id}}</th>
+                <td>{{ticket.id}}</td>
+                <td>{{ticket.id}}</td>
+                <td>{{ buscarUsuario(ticket.id) }}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div *ngIf="alertData" class="col-md-12">
+        <app-alert></app-alert>
+    </div>
+</div>
